@@ -1,8 +1,7 @@
 package com.epam.training.shop;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.epam.training.shop.store.Store;
 
@@ -17,8 +16,9 @@ public class Application {
 
 
 	public static void main(String[] args) {
-		BeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
-		Store store = factory.getBean(Store.class);
-		start(store);		
+		try (AbstractApplicationContext  context = new ClassPathXmlApplicationContext("beans.xml")) {
+			Store store = context.getBean(Store.class);
+			start(store);					
+		}
 	}
 }
