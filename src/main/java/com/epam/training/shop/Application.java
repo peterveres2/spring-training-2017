@@ -1,12 +1,16 @@
 package com.epam.training.shop;
 
+import com.epam.training.shop.data.MemoryDataStore;
+import com.epam.training.shop.model.Product;
+import com.epam.training.shop.price.DiscountPriceCalculator;
+import com.epam.training.shop.price.ExclusivePriceCalculator;
 import com.epam.training.shop.store.Store;
 
 public class Application {
 
 	public void startDefault() {
 		System.out.println("Default store: ");
-		Store store = new Store();
+		Store store = new Store(new MemoryDataStore<Product>(), new DiscountPriceCalculator());
 		store.open();
 		store.printPrices();
 		System.out.println("Stock: " + store.stock());
@@ -14,10 +18,11 @@ public class Application {
 
 	public void startExclusive() {
 		System.out.println("Exclusive store: ");
-		Store store = new Store(true);
+		Store store = new Store(new MemoryDataStore<Product>(), new ExclusivePriceCalculator());
 		store.open();
 		store.printPrices();
 		System.out.println("Stock: " + store.stock());
+		
 	}
 
 	public static void main(String[] args) {

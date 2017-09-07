@@ -2,50 +2,36 @@ package com.epam.training.shop.store;
 
 import java.math.BigDecimal;
 
-import com.epam.training.shop.data.MemoryDataStore;
+import com.epam.training.shop.data.DataStore;
 import com.epam.training.shop.model.Product;
-import com.epam.training.shop.price.DiscountPriceCalculator;
-import com.epam.training.shop.price.ExclusivePriceCalculator;
+import com.epam.training.shop.price.PriceCalculator;
 
 public class Store {
 
-	private MemoryDataStore<Product> memoryDataStore = new MemoryDataStore<Product>();
-	private boolean exclusive;
+	private final DataStore<Product> dataStore;
+	private final PriceCalculator priceCalculator;
 
-	public Store() {
-	}
-
-	public Store(boolean exclusive) {
-		this.exclusive = exclusive;
+	public Store(DataStore<Product> dataStore, PriceCalculator priceCalculator) {
+		this.dataStore = dataStore;
+		this.priceCalculator = priceCalculator;
 	}
 
 	public void open() {
-		memoryDataStore.add(new Product("Book", new BigDecimal("100")));
-		memoryDataStore.add(new Product("UberLaptop", new BigDecimal("10000")));
+		dataStore.add(new Product("Book", new BigDecimal("100")));
+		dataStore.add(new Product("UberLaptop", new BigDecimal("10000")));
 	}
 
 	public void printPrices() {
-		for (Product product : memoryDataStore.list()) {
-			BigDecimal price;
-			if (exclusive) {
-				price = new ExclusivePriceCalculator().price(product);
-			} else {
-				price = new DiscountPriceCalculator().price(product);
-			}
-			System.out.println(product.getName() + ": " + price);
+		for (Product product : dataStore.list()) {
+			System.out.println(product.getName() + ": " + priceCalculator.price(product));
+
 		}
 	}
 
 	public BigDecimal stock() {
 		BigDecimal sum = BigDecimal.ZERO;
-		for (Product product : memoryDataStore.list()) {
-			BigDecimal price;
-			if (exclusive) {
-				price = new ExclusivePriceCalculator().price(product);
-			} else {
-				price = new DiscountPriceCalculator().price(product);
-			}
-			sum = sum.add(price);
+		for (Product product : dataStore.list()) {
+			sum = sum.add(priceCalculator.price(product));
 		}
 		return sum;
 	}

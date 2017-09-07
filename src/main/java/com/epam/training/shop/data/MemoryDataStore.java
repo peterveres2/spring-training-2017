@@ -3,7 +3,7 @@ package com.epam.training.shop.data;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class MemoryDataStore<T> {
+public class MemoryDataStore<T> implements DataStore<T> {
 
 	private ArrayList<T> store = new ArrayList<T>();
 
