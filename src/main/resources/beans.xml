@@ -10,6 +10,11 @@
 	</bean>
 	
 	<bean class="com.epam.training.shop.price.ExclusivePriceCalculator" name="exclusivePriceCalculator"/>
+	
+	<bean class="com.epam.training.shop.price.ConfigurableDiscountPriceCalculator" name="eightyPercentDPC">
+		<constructor-arg value="0.8"/>
+	</bean>
+	
 	<bean class="com.epam.training.shop.data.MemoryDataStore" name="memoryDataStore"/>
 
 </beans>

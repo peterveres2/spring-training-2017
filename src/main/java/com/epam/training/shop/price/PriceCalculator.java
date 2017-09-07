@@ -5,5 +5,9 @@ import java.math.BigDecimal;
 import com.epam.training.shop.model.Product;
 
 public interface PriceCalculator {
-	public BigDecimal price(Product product);
+	BigDecimal price(Product product);
+	
+	default int indetityHashCode() {
+		return System.identityHashCode(this);
+	}
 }

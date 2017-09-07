@@ -10,4 +10,5 @@ public class DiscountPriceCalculator implements PriceCalculator {
 		return product.getPrice().multiply(new BigDecimal("0.9"));
 	}
 
+	
 }
