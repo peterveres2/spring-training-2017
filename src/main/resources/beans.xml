@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.epam.training.shop.store.Store">
+		<constructor-arg ref="exclusivePriceCalculator"/>
+		<constructor-arg ref="memoryDataStore"/>
+		<constructor-arg value="Exclusive store"/>
+	</bean>
+	
+	<bean class="com.epam.training.shop.price.ExclusivePriceCalculator" name="exclusivePriceCalculator"/>
+	<bean class="com.epam.training.shop.data.MemoryDataStore" name="memoryDataStore"/>
+
+</beans>

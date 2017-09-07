@@ -10,10 +10,12 @@ public class Store {
 
 	private final DataStore<Product> dataStore;
 	private final PriceCalculator priceCalculator;
+	private final String storeType;
 
-	public Store(DataStore<Product> dataStore, PriceCalculator priceCalculator) {
+	public Store(DataStore<Product> dataStore, PriceCalculator priceCalculator, String storeType) {
 		this.dataStore = dataStore;
 		this.priceCalculator = priceCalculator;
+		this.storeType = storeType;
 	}
 
 	public void open() {
@@ -35,5 +37,11 @@ public class Store {
 		}
 		return sum;
 	}
+
+	public String getStoreType() {
+		return storeType;
+	}
+
+	
 
 }

@@ -1,33 +1,24 @@
 package com.epam.training.shop;
 
-import com.epam.training.shop.data.MemoryDataStore;
-import com.epam.training.shop.model.Product;
-import com.epam.training.shop.price.DiscountPriceCalculator;
-import com.epam.training.shop.price.ExclusivePriceCalculator;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+
 import com.epam.training.shop.store.Store;
 
 public class Application {
 
-	public void startDefault() {
-		System.out.println("Default store: ");
-		Store store = new Store(new MemoryDataStore<Product>(), new DiscountPriceCalculator());
+	public static void start(Store store) {
+		System.out.println(store.getStoreType() + ": ");
 		store.open();
 		store.printPrices();
 		System.out.println("Stock: " + store.stock());
 	}
 
-	public void startExclusive() {
-		System.out.println("Exclusive store: ");
-		Store store = new Store(new MemoryDataStore<Product>(), new ExclusivePriceCalculator());
-		store.open();
-		store.printPrices();
-		System.out.println("Stock: " + store.stock());
-		
-	}
 
 	public static void main(String[] args) {
-		new Application().startDefault();
-		System.out.println();
-		new Application().startExclusive();
+		BeanFactory factory = new XmlBeanFactory(new ClassPathResource("beans.xml"));
+		Store store = factory.getBean(Store.class);
+		start(store);		
 	}
 }
