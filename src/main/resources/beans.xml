@@ -10,6 +10,7 @@
 	</bean>
 	
 	<bean class="com.epam.training.shop.price.ExclusivePriceCalculator" name="exclusivePriceCalculator"/>
+	<bean class="com.epam.training.shop.price.RandomDiscountPriceCalculator" scope="prototype"/>
 	
 	<bean class="com.epam.training.shop.price.ConfigurableDiscountPriceCalculator" name="eightyPercentDPC">
 		<constructor-arg value="0.8"/>

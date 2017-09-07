@@ -1,9 +1,13 @@
 package com.epam.training.shop;
 
+import java.math.BigDecimal;
+
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.epam.training.shop.model.Product;
 import com.epam.training.shop.price.PriceCalculator;
+import com.epam.training.shop.price.RandomDiscountPriceCalculator;
 import com.epam.training.shop.store.Store;
 
 public class Application {
@@ -25,6 +29,12 @@ public class Application {
 			PriceCalculator eightyPercentDPC2 = context.getBean("eightyPercentDPC", PriceCalculator.class);
 			System.out.println(eightyPercentDPC.indetityHashCode());
 			System.out.println(eightyPercentDPC2.indetityHashCode());
+			
+			
+			Product apple = new Product("apple", new BigDecimal(100));
+			System.out.println(context.getBean(RandomDiscountPriceCalculator.class).price(apple));
+			System.out.println(context.getBean(RandomDiscountPriceCalculator.class).price(apple));
+			System.out.println(context.getBean(RandomDiscountPriceCalculator.class).price(apple));
 			
 		}
 	}

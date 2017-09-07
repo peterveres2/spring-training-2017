@@ -16,6 +16,7 @@ public class ConfigurableDiscountPriceCalculator implements PriceCalculator {
 	public BigDecimal price(Product product) {
 		return product.getPrice().multiply(discount);
 	}
+	
 
 	
 }
